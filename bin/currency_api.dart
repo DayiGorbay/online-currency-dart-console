@@ -22,14 +22,20 @@ void clearConsole() {
 Future<void> main (List<String> arguments) async {
   // print('Currency API Project: ${api.getResponse()}!');
 
+  // Color Varibales
+  String red(String text) => '\x1B[31m$text\x1B[0m';
+  String green(String text) => '\x1B[32m$text\x1B[0m';
+  String yellow(String text) => '\x1B[33m$text\x1B[0m';
+
+
   final table_en = Table(  
-    header: ['Name', 'English Name', 'Price', 'Chaneg Vlue', 'Change Percent', 'Last Update'],
-    columnWidths: [15,20,15,15,15,20],
+    header: ['Name', 'English Name', 'Price', 'Change Value', 'Change Percent', 'Last Update'],
+    columnWidths: [15,20,15,15,18,20],
   );
 
   final table_fa = Table(
     header: ['آخرین بروزرسانی', 'درصد تغییر', 'مقدار تغییر', 'قیمت ارز', 'نام لاتین', 'نام ارز'],
-    columnWidths: [20,15,15,15,20,15],
+    columnWidths: [20,18,15,15,20,15],
   );
 
   print("fetching data from API...");
@@ -37,13 +43,13 @@ Future<void> main (List<String> arguments) async {
   String result = await api.getResponse();
 
   if (result != "Success") {
-    print("Error: $result");
+    print(red("Error: $result"));
     print("Press enter to exit...");
     await stdin.first;
     return;
   }
 
-  print("Done!");
+  print(green("Done!"));
   sleep(Duration(seconds: 1));
   clearConsole();
 
@@ -56,14 +62,29 @@ Future<void> main (List<String> arguments) async {
     // print("آخرین بروزرسانی قیمت: ${item.date} ${item.time}");
     // print("-------------------");
 
+    // Colorize change currency price
+
+    double changePercent = double.parse(item.change_percent as String);
+    int changeValue = int.parse(item.change_value as String);
+
+    String coloredPercent =
+      changePercent >= 0
+        ? '\x1B[32m${item.change_percent}%\x1B[0m'
+        : '\x1B[31m${item.change_percent}%\x1B[0m';
+
+    String coloredValue(String text) =>
+      changeValue >= 0
+        ? '\x1B[32m$text\x1B[0m'
+        : '\x1B[31m$text\x1B[0m';
+
     // English alignment version
     table_en
       .add([
         item.name,
         item.name_en,
         "${formatNumber(item.price as String)} ${item.unit}",
-        formatNumber(item.change_value as String),
-        "${item.change_percent}%",
+        coloredValue(formatNumber(item.change_value as String)),
+        coloredPercent,
         "${item.date} - ${item.time}",
       ]);
 
@@ -71,8 +92,8 @@ Future<void> main (List<String> arguments) async {
     table_fa
       .add([
         "${item.date} - ${item.time}",
-        "${item.change_percent}%",
-        formatNumber(item.change_value as String),
+        coloredPercent,
+        coloredValue(formatNumber(item.change_value as String)),
         "${formatNumber(item.price as String)} ${item.unit}",
         item.name_en,
         item.name,
@@ -80,7 +101,9 @@ Future<void> main (List<String> arguments) async {
 
   }
 
+  print("English alignment version - LTR:");
   print(table_en.toString());
+  print("Persian alignment version - RTL:");
   print(table_fa.toString());
 
   print("Press enter to exit...");
