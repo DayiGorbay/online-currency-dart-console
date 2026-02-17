@@ -38,7 +38,7 @@ Future<void> main (List<String> arguments) async {
     columnWidths: [20,18,15,15,20,15],
   );
 
-  print("fetching data from API...");
+  print(yellow("fetching data from API..."));
 
   String result = await api.getResponse();
 
