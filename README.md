@@ -34,3 +34,52 @@ A command-line Dart application that fetches real-time currency data from an ext
 ```bash
 git clone https://github.com/your-username/currency_api.git
 cd currency_api
+```
+
+### 2️⃣ Install dependencies
+
+```bash
+dart pub get
+```
+
+### 3️⃣ Create .env file
+
+Create a file named `.env` inside project root and add:
+
+```bash
+API_URL=YOUR_API_URL
+API_KEY=YOUR_API_KEY
+```
+
+⚠ Make sure .env is included in .gitignore
+
+## ▶ Running the project
+
+### 🏗 Build executable
+
+```bash
+dart compile exe bin/currency_api.dart
+```
+
+After build in `bin/currency_api.exe` run `currency_api.exe`
+
+## 🖥 Console & Encoding Notes (Windows)
+
+### UTF-8 Support
+
+If Persian text does not display correctly in CMD:
+```bash
+chcp 65001
+```
+
+## Use:
+
+Windows Terminal (recommended)
+PowerShell
+Font: Consolas or Cascadia Mono
+
+### RTL Limitation
+
+Windows console does NOT properly support Right-To-Left rendering.
+Persian text may appear reversed.
+This is a console limitation, not a Dart issue.
