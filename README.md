@@ -74,12 +74,26 @@ chcp 65001
 
 ## Use:
 
-Windows Terminal (recommended)
-PowerShell
-Font: Consolas or Cascadia Mono
+- Windows Terminal (recommended)
+- PowerShell
+Font: `Consolas` or `Cascadia Mono`
 
 ### RTL Limitation
 
 Windows console does NOT properly support Right-To-Left rendering.
 Persian text may appear reversed.
 This is a console limitation, not a Dart issue.
+
+## 🔑 API Setup & Data Structure
+
+You can obtain your API key by visiting `https://brsapi.ir/` after registering on the website, generate your personal API key and add it to your `.env` file.
+
+
+This project is fully structured based on the JSON response format provided by the BRSAPI.
+
+The application parses the response using:
+
+- `Map<String, dynamic>` for the main JSON object  
+- Nested `List<dynamic>` inside the map for currency data collections  
+
+The data model and logic are designed specifically according to the API's JSON structure to ensure clean parsing, scalability, and maintainability.
