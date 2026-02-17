@@ -1,4 +1,4 @@
-# 💱 Currency API CLI
+# 💰 Currency API CLI
 
 A command-line Dart application that fetches real-time currency data from an external API and displays it in a formatted table inside the terminal.
 
@@ -11,8 +11,6 @@ A command-line Dart application that fetches real-time currency data from an ext
 - 📊 Clean CLI table output using `cli_table`  
 - 🎨 Colored terminal output (positive/negative changes)  
 - 🌐 Internet connection error handling  
-- 🧹 Console auto clear for clean UI  
-- 🪟 Windows compatible (CMD / PowerShell / Windows Terminal)  
 - 🏗 Compiled as standalone `.exe`  
 
 ---
@@ -21,6 +19,7 @@ A command-line Dart application that fetches real-time currency data from an ext
 
 - Dart  
 - `http` package  
+- `intl`
 - `dotenv`  
 - `cli_table`  
 - ANSI escape codes (for color & console control)  
@@ -94,6 +93,6 @@ This project is fully structured based on the JSON response format provided by t
 The application parses the response using:
 
 - `Map<String, dynamic>` for the main JSON object  
-- Nested `List<dynamic>` inside the map for currency data collections  
+- Nested `List` inside the map for currency data collections  
 
 The data model and logic are designed specifically according to the API's JSON structure to ensure clean parsing, scalability, and maintainability.
