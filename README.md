@@ -75,7 +75,7 @@ chcp 65001
 
 - Windows Terminal (recommended)
 - PowerShell
-Font: `Consolas` or `Cascadia Mono`
+- Font: `Consolas` or `Cascadia Mono`
 
 ### RTL Limitation
 
